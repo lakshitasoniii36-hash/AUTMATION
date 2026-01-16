@@ -71,6 +71,7 @@ const ServiceCard = React.forwardRef<
                     "group block select-none rounded-xl p-5 no-underline outline-none transition-all duration-300 hover:bg-white/10",
                     className
                 )}
+                style={{ color: '#ffffff' }}
                 {...props}
             >
                 <div className="flex items-start gap-3">
@@ -78,11 +79,11 @@ const ServiceCard = React.forwardRef<
                         <div className="text-3xl flex-shrink-0">{icon}</div>
                     )}
                     <div className="flex-1">
-                        <div className="text-lg font-semibold text-white mb-2 group-hover:text-white transition-colors">
+                        <div className="text-lg font-semibold mb-2" style={{ color: '#ffffff' }}>
                             {title}
                         </div>
                         {description && (
-                            <p className="text-sm text-white/90 leading-relaxed group-hover:text-white transition-colors">
+                            <p className="text-sm leading-relaxed" style={{ color: 'rgba(255,255,255,0.9)' }}>
                                 {description}
                             </p>
                         )}

@@ -8,7 +8,6 @@ interface Service {
     title: string;
     description: string;
     detailedExplanation: string;
-    keyFeatures: string[];
     icon: string;
 }
 
@@ -17,78 +16,42 @@ const services: Service[] = [
         id: 'autonomous-agents',
         title: 'Autonomous AI Agents',
         description: 'Self-operating agents that handle complex tasks and make decisions independently',
-        detailedExplanation: 'Our autonomous AI agents are intelligent systems that perceive their environment, process information, and take actions to achieve specific goals without constant human oversight.',
-        keyFeatures: [
-            'Self-directed task execution',
-            'Real-time decision-making',
-            'Adaptive learning from outcomes',
-            'Multi-step process coordination',
-        ],
+        detailedExplanation: 'Our autonomous AI agents are intelligent systems that perceive their environment, process information, and take actions to achieve specific goals without constant human oversight. They feature self-directed task execution with real-time decision-making capabilities. These agents continuously learn from outcomes and coordinate multi-step processes seamlessly.',
         icon: '🤖',
     },
     {
         id: 'workflow-automation',
         title: 'Workflow Automation',
         description: 'End-to-end automation of repetitive business processes',
-        detailedExplanation: 'Streamline your operations by automating repetitive tasks and creating intelligent workflows that execute consistently and reliably.',
-        keyFeatures: [
-            'Cross-platform integration',
-            'Conditional logic workflows',
-            'Error handling & retry mechanisms',
-            'Real-time monitoring',
-        ],
+        detailedExplanation: 'Streamline your operations by automating repetitive tasks and creating intelligent workflows that execute consistently and reliably. Our solutions provide cross-platform integration with conditional logic workflows and robust error handling. Real-time monitoring ensures your automated processes run smoothly 24/7.',
         icon: '⚡',
     },
     {
         id: 'customer-support',
         title: 'Customer Support Automation',
         description: '24/7 intelligent customer service solutions',
-        detailedExplanation: 'AI agents that handle customer queries, support tickets, and follow-up communications around the clock with human-level understanding and empathy.',
-        keyFeatures: [
-            'Natural language understanding',
-            'Multi-channel support',
-            'Intelligent ticket routing',
-            'Automated resolution protocols',
-        ],
+        detailedExplanation: 'AI agents that handle customer queries, support tickets, and follow-up communications around the clock with human-level understanding and empathy. Advanced natural language understanding enables multi-channel support across all platforms. Intelligent ticket routing and automated resolution protocols ensure fast, accurate responses.',
         icon: '💬',
     },
     {
         id: 'data-processing',
         title: 'Data Processing & Intelligence',
         description: 'Automated data analysis and actionable insights',
-        detailedExplanation: 'Transform raw data into strategic insights with automated collection, transformation, and analysis pipelines.',
-        keyFeatures: [
-            'Automated data ingestion',
-            'Real-time data cleaning',
-            'Pattern recognition',
-            'Predictive analytics',
-        ],
+        detailedExplanation: 'Transform raw data into strategic insights with automated collection, transformation, and analysis pipelines. Our systems handle automated data ingestion with real-time cleaning and validation. Advanced pattern recognition and predictive analytics deliver actionable intelligence for informed decision-making.',
         icon: '📊',
     },
     {
         id: 'system-integration',
         title: 'System Integration Agents',
         description: 'Seamless connection between platforms',
-        detailedExplanation: 'AI agents that connect and coordinate disparate tools, platforms, and databases, creating unified workflows across your entire technology stack.',
-        keyFeatures: [
-            'Bidirectional data sync',
-            'Event-driven automation',
-            'Legacy system integration',
-            'API orchestration',
-        ],
+        detailedExplanation: 'AI agents that connect and coordinate disparate tools, platforms, and databases, creating unified workflows across your entire technology stack. Bidirectional data synchronization keeps all systems perfectly aligned. Event-driven automation with legacy system integration capabilities ensures comprehensive API orchestration.',
         icon: '🔗',
     },
     {
         id: 'custom-development',
         title: 'Custom AI Agent Development',
         description: 'Tailored AI solutions for your needs',
-        detailedExplanation: 'Purpose-built AI agents designed specifically for your unique business logic, proprietary workflows, and industry requirements.',
-        keyFeatures: [
-            'Domain-specific knowledge',
-            'Custom decision frameworks',
-            'Proprietary algorithms',
-            'Regulatory compliance',
-        ],
+        detailedExplanation: 'Purpose-built AI agents designed specifically for your unique business logic, proprietary workflows, and industry requirements. We develop domain-specific knowledge bases with custom decision frameworks tailored to your needs. Our proprietary algorithms ensure regulatory compliance while maximizing efficiency and performance.',
         icon: '⚙️',
     },
 ];
@@ -178,12 +141,12 @@ export default function Services() {
                                         transformStyle: 'preserve-3d',
                                     }}
                                 >
-                                    <div className="flex flex-col h-full">
+                                    <div className="flex flex-col h-full text-center">
                                         <div className="text-7xl mb-6">{service.icon}</div>
                                         <h3 className="text-3xl font-bold text-white mb-5 leading-tight">
                                             {service.title}
                                         </h3>
-                                        <p className="text-xl text-white/75 mb-6 leading-relaxed">
+                                        <p className="text-2xl text-white mb-6 leading-relaxed">
                                             {service.description}
                                         </p>
                                     </div>
@@ -242,30 +205,18 @@ export default function Services() {
                                     />
 
                                     {/* Card Content */}
-                                    <div className="relative z-10 flex flex-col h-full text-center">
+                                    <div className="relative z-10 flex flex-col h-full text-center items-center">
                                         <div className="text-7xl mb-6">{service.icon}</div>
-                                        <h3 className="text-3xl font-bold text-white mb-5 leading-tight">
-                                            {service.title}
-                                        </h3>
-                                        <p className="text-2xl text-white/75 mb-6 leading-relaxed">
-                                            {service.description}
-                                        </p>
-                                        <p className="text-xl text-white/60 leading-relaxed" style={{ marginBottom: '0.75rem' }}>
-                                            {service.detailedExplanation}
-                                        </p>
-
-                                        {/* Key Features */}
-                                        <div className="space-y-2 mt-auto">
-                                            <h4 className="text-xl font-bold text-white/90 uppercase tracking-wider mb-3">
-                                                Key Features
-                                            </h4>
-                                            <div className="space-y-2">
-                                                {service.keyFeatures.map((feature, idx) => (
-                                                    <div key={idx} className="text-center">
-                                                        <span className="text-2xl text-white/85">{feature}</span>
-                                                    </div>
-                                                ))}
-                                            </div>
+                                        <div className="max-w-2xl">
+                                            <h3 className="text-3xl font-bold text-white mb-5 leading-tight">
+                                                {service.title}
+                                            </h3>
+                                            <p className="text-2xl text-white mb-6 leading-relaxed">
+                                                {service.description}
+                                            </p>
+                                            <p className="text-xl text-white/80 leading-relaxed">
+                                                {service.detailedExplanation}
+                                            </p>
                                         </div>
                                     </div>
 
@@ -275,12 +226,6 @@ export default function Services() {
                                         style={{
                                             background: 'linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.4) 50%, transparent 100%)',
                                         }}
-                                    />
-
-                                    {/* Enhanced shadow on hover */}
-                                    <div
-                                        className="absolute inset-0 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-400 pointer-events-none"
-                                        style={{ boxShadow: '0 40px 120px rgba(255, 255, 255, 0.2)' }}
                                     />
                                 </motion.div>
                             ))}

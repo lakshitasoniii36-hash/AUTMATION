@@ -1,89 +1,65 @@
 'use client';
 
-import { useState, useEffect, useRef } from 'react';
-import Image from 'next/image';
-
-interface FrameAnimationProps {
-    totalFrames?: number;
-    frameRate?: number;
-    loop?: boolean;
-    autoPlay?: boolean;
-    className?: string;
-}
+import { useState, useEffect } from 'react';
 
 export default function FrameAnimation({
     totalFrames = 192,
     frameRate = 30,
     loop = true,
-    autoPlay = true,
     className = ''
-}: FrameAnimationProps) {
+}) {
     const [currentFrame, setCurrentFrame] = useState(1);
-    const [isPlaying, setIsPlaying] = useState(autoPlay);
-    const [imageError, setImageError] = useState<string | null>(null);
-    const animationRef = useRef<number>();
-    const lastFrameTimeRef = useRef<number>(0);
-
-    const frameInterval = 1000 / frameRate;
 
     useEffect(() => {
-        if (!isPlaying) return;
+        const interval = setInterval(() => {
+            setCurrentFrame(prev => {
+                if (prev >= totalFrames) {
+                    console.log(`✅ Reached frame ${prev}, looping back to 1`);
+                    return loop ? 1 : totalFrames;
+                }
+                return prev + 1;
+            });
+        }, 1000 / frameRate);
 
-        const animate = (timestamp: number) => {
-            if (timestamp - lastFrameTimeRef.current >= frameInterval) {
-                setCurrentFrame((prev) => {
-                    const nextFrame = prev + 1;
-                    if (nextFrame > totalFrames) {
-                        console.log('🔄 Looping back to frame 1');
-                        return loop ? 1 : totalFrames;
-                    }
-                    return nextFrame;
-                });
-                lastFrameTimeRef.current = timestamp;
-            }
-            animationRef.current = requestAnimationFrame(animate);
-        };
-
-        animationRef.current = requestAnimationFrame(animate);
-
-        return () => {
-            if (animationRef.current) {
-                cancelAnimationFrame(animationRef.current);
-            }
-        };
-    }, [isPlaying, frameRate, totalFrames, loop, frameInterval]);
+        return () => clearInterval(interval);
+    }, [frameRate, totalFrames, loop]);
 
     const getFramePath = (frameNum: number) => {
         const paddedNum = String(frameNum).padStart(3, '0');
         return `/frames/ezgif-frame-${paddedNum}.png`;
     };
 
-    // Log frame changes
+    // Log every frame
     useEffect(() => {
         const path = getFramePath(currentFrame);
         console.log(`📽️ Frame ${currentFrame}/${totalFrames} → ${path}`);
+
+        // Special logging for frames 128-130
+        if (currentFrame >= 128 && currentFrame <= 130) {
+            console.log(`🎯 CRITICAL FRAME ${currentFrame} LOADING!`);
+        }
     }, [currentFrame, totalFrames]);
 
     return (
         <div className={`relative w-full h-full ${className}`}>
             <img
+                key={currentFrame} // Force re-render on frame change
                 src={getFramePath(currentFrame)}
                 alt={`Frame ${currentFrame}`}
                 className="absolute inset-0 w-full h-full object-cover"
                 onError={(e) => {
-                    const error = `Failed to load frame ${currentFrame}`;
-                    console.error('❌', error);
-                    setImageError(error);
+                    console.error(`❌ FAILED TO LOAD: Frame ${currentFrame} at ${getFramePath(currentFrame)}`);
                 }}
                 onLoad={() => {
-                    setImageError(null);
+                    if (currentFrame >= 128 && currentFrame <= 130) {
+                        console.log(`✅ Successfully loaded frame ${currentFrame}`);
+                    }
                 }}
             />
-            {/* Debug overlay */}
-            <div className="absolute top-4 left-4 bg-black/90 text-white px-4 py-2 rounded text-sm font-mono space-y-1">
-                <div className="text-green-400 font-bold">Frame: {currentFrame}/{totalFrames}</div>
-                <div className="text-xs text-gray-400">{getFramePath(currentFrame)}</div>
-                {imageError && <div className="text-red-400 text-xs">⚠️ {imageError}</div>}
+            {/* Large debug overlay */}
+            <div className="absolute top-4 left-4 bg-red-600 text-white px-6 py-4 rounded-lg text-2xl font-bold shadow-2xl z-50">
+                <div>Frame: {currentFrame} / {totalFrames}</div>
+                <div className="text-base mt-2 font-mono">{getFramePath(currentFrame)}</div>
             </div>
         </div>
     );

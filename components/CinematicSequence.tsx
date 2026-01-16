@@ -8,8 +8,8 @@ export default function CinematicSequence() {
     useEffect(() => {
         const onScroll = () => {
             const scrollY = window.scrollY;
-            // Updated to use 128 frames with adjusted scroll sensitivity
-            const newFrame = Math.min(128, Math.max(1, Math.floor(scrollY / 15) + 1));
+            // Updated to use 192 frames with adjusted scroll sensitivity
+            const newFrame = Math.min(192, Math.max(1, Math.floor(scrollY / 15) + 1));
             setFrame(newFrame);
         };
 
