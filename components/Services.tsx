@@ -141,12 +141,12 @@ export default function Services() {
                                         transformStyle: 'preserve-3d',
                                     }}
                                 >
-                                    <div className="flex flex-col h-full text-center">
+                                    <div className="flex flex-col h-full text-center items-center">
                                         <div className="text-7xl mb-6">{service.icon}</div>
                                         <h3 className="text-3xl font-bold text-white mb-5 leading-tight">
                                             {service.title}
                                         </h3>
-                                        <p className="text-2xl text-white mb-6 leading-relaxed">
+                                        <p className="text-2xl text-white mb-6 leading-relaxed max-w-md mx-auto">
                                             {service.description}
                                         </p>
                                     </div>
@@ -207,14 +207,14 @@ export default function Services() {
                                     {/* Card Content */}
                                     <div className="relative z-10 flex flex-col h-full text-center items-center">
                                         <div className="text-7xl mb-6">{service.icon}</div>
-                                        <div className="max-w-2xl">
+                                        <div>
                                             <h3 className="text-3xl font-bold text-white mb-5 leading-tight">
                                                 {service.title}
                                             </h3>
-                                            <p className="text-2xl text-white mb-6 leading-relaxed">
+                                            <p className="text-2xl text-white mb-6 leading-relaxed max-w-md mx-auto">
                                                 {service.description}
                                             </p>
-                                            <p className="text-xl text-white/80 leading-relaxed">
+                                            <p className="text-xl text-white/80 leading-relaxed max-w-lg mx-auto">
                                                 {service.detailedExplanation}
                                             </p>
                                         </div>
