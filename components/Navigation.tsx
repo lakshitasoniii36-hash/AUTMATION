@@ -16,40 +16,83 @@ import { cn } from "@/lib/utils"
 interface Service {
     id: string;
     title: string;
+    description: string;
+    icon: string;
 }
 
 const services: Service[] = [
-    { id: 'autonomous-agents', title: 'Autonomous AI Agents' },
-    { id: 'workflow-automation', title: 'Workflow Automation' },
-    { id: 'customer-support', title: 'Customer Support Automation' },
-    { id: 'data-processing', title: 'Data Processing & Intelligence' },
-    { id: 'system-integration', title: 'System Integration Agents' },
-    { id: 'custom-development', title: 'Custom AI Agent Development' },
+    {
+        id: 'autonomous-agents',
+        title: 'Autonomous AI Agents',
+        description: 'Self-operating agents that handle complex tasks independently',
+        icon: '🤖'
+    },
+    {
+        id: 'workflow-automation',
+        title: 'Workflow Automation',
+        description: 'End-to-end automation of business processes',
+        icon: '⚡'
+    },
+    {
+        id: 'customer-support',
+        title: 'Customer Support Automation',
+        description: '24/7 intelligent customer service solutions',
+        icon: '💬'
+    },
+    {
+        id: 'data-processing',
+        title: 'Data Processing & Intelligence',
+        description: 'Automated data analysis and insights',
+        icon: '📊'
+    },
+    {
+        id: 'system-integration',
+        title: 'System Integration Agents',
+        description: 'Seamless connection between platforms',
+        icon: '🔗'
+    },
+    {
+        id: 'custom-development',
+        title: 'Custom AI Agent Development',
+        description: 'Tailored AI solutions for your needs',
+        icon: '⚙️'
+    },
 ];
 
-const ListItem = React.forwardRef<
+const ServiceCard = React.forwardRef<
     React.ElementRef<"a">,
-    React.ComponentPropsWithoutRef<"a">
->(({ className, title, ...props }, ref) => {
+    React.ComponentPropsWithoutRef<"a"> & { description?: string; icon?: string }
+>(({ className, title, description, icon, ...props }, ref) => {
     return (
-        <li>
-            <NavigationMenuLink asChild>
-                <a
-                    ref={ref}
-                    className={cn(
-                        "block select-none rounded-sm px-4 py-3 leading-none no-underline outline-none transition-colors hover:bg-white/10",
-                        className
+        <NavigationMenuLink asChild>
+            <a
+                ref={ref}
+                className={cn(
+                    "group block select-none rounded-xl p-5 no-underline outline-none transition-all duration-300 hover:bg-white/10",
+                    className
+                )}
+                {...props}
+            >
+                <div className="flex items-start gap-3">
+                    {icon && (
+                        <div className="text-3xl flex-shrink-0">{icon}</div>
                     )}
-                    style={{ color: 'rgba(255, 255, 255, 0.9)', fontSize: '16px' }}
-                    {...props}
-                >
-                    {title}
-                </a>
-            </NavigationMenuLink>
-        </li>
+                    <div className="flex-1">
+                        <div className="text-lg font-semibold text-white mb-2 group-hover:text-white transition-colors">
+                            {title}
+                        </div>
+                        {description && (
+                            <p className="text-sm text-white/90 leading-relaxed group-hover:text-white transition-colors">
+                                {description}
+                            </p>
+                        )}
+                    </div>
+                </div>
+            </a>
+        </NavigationMenuLink>
     )
 })
-ListItem.displayName = "ListItem"
+ServiceCard.displayName = "ServiceCard"
 
 export default function Navigation() {
     const scrollToSection = (sectionId: string) => {
@@ -96,19 +139,40 @@ export default function Navigation() {
                             Services
                         </NavigationMenuTrigger>
                         <NavigationMenuContent>
-                            <ul className="grid grid-cols-2 gap-x-6 gap-y-1 p-6 w-[600px] bg-black/90 backdrop-blur-md border border-white/8 rounded-lg shadow-2xl">
-                                {services.map((service) => (
-                                    <ListItem
-                                        key={service.id}
-                                        title={service.title}
-                                        href="#services"
-                                        onClick={(e) => {
-                                            e.preventDefault();
-                                            scrollToSection('services');
-                                        }}
-                                    />
-                                ))}
-                            </ul>
+                            {/* BLURRED GREY PANEL - HALF SIZE */}
+                            <div
+                                className="rounded-2xl shadow-2xl"
+                                style={{
+                                    width: '40vw',
+                                    maxWidth: '700px',
+                                    padding: '2rem 2.5rem',
+                                    background: 'rgba(128, 128, 128, 0.85)',
+                                    backdropFilter: 'blur(20px)',
+                                    WebkitBackdropFilter: 'blur(20px)',
+                                    border: '1px solid rgba(255, 255, 255, 0.15)',
+                                }}
+                            >
+                                <div className="mb-6">
+                                    <h3 className="text-3xl font-bold text-white mb-2">Our Services</h3>
+                                    <p className="text-base text-white/90">Explore our AI automation solutions</p>
+                                </div>
+
+                                <div className="grid grid-cols-1 gap-3">
+                                    {services.map((service) => (
+                                        <ServiceCard
+                                            key={service.id}
+                                            title={service.title}
+                                            description={service.description}
+                                            icon={service.icon}
+                                            href="#services"
+                                            onClick={(e) => {
+                                                e.preventDefault();
+                                                scrollToSection('services');
+                                            }}
+                                        />
+                                    ))}
+                                </div>
+                            </div>
                         </NavigationMenuContent>
                     </NavigationMenuItem>
                 </NavigationMenuList>

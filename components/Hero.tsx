@@ -36,7 +36,7 @@ export default function Hero() {
                     }}
                     style={{ marginTop: '2rem' }}
                 >
-                    <p className="text-2xl md:text-3xl text-pearl-white/50 max-w-2xl mx-auto leading-[1.8]">
+                    <p className="text-[2rem] md:text-[2.5rem] text-pearl-white/50 max-w-3xl mx-auto leading-[1.7]">
                         Autonomous intelligence systems that orchestrate workflows,
                         make decisions, and execute tasks without human intervention.
                     </p>

@@ -5,10 +5,16 @@ import Navigation from '@/components/Navigation';
 import Hero from '@/components/Hero';
 import Benefits from '@/components/Benefits';
 import Services from '@/components/Services';
+import FrameAnimation from '@/components/FrameAnimation';
 
 export default function Home() {
   return (
     <main className="relative bg-dark min-h-screen">
+      {/* Frame Animation - Fixed Background Layer */}
+      <div className="fixed inset-0 z-0 opacity-30">
+        <FrameAnimation frameRate={30} loop={true} />
+      </div>
+
       {/* Cinematic Sequence - Fixed Background */}
       <CinematicSequence />
 
